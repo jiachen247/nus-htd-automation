@@ -1,0 +1,17 @@
+{
+  "name": "htd-jiachen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jiachen247",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.28",
+    "querystring": "^0.2.0"
+  }
+}
