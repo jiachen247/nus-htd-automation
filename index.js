@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 var moment = require('moment');
 var moment = require("moment-timezone");
@@ -13,17 +12,12 @@ exports.handler = async (event) => {
   return response;
 };
 
-/* TEMPRETURE TAKER
-This script magically sticks a thermometer into your mouth, takes your temp and then reports it to the nus htd portal!
-USE AT YOUR OWN RISK LOL
-*/
-
 /* Config */
 const CLIENT_ID = "97F0D1CACA7D41DE87538F9362924CCB-184318"
 const now = moment.tz(Date.now(), "Asia/Singapore").format("DD/MM/YYYY");
 const username = process.env.NUSNET_ID;
 const password = process.env.NUSNET_PASSWORD;
-const isMorning = parseInt(moment.tz(Date.now(), "Asia/Singapore").format("HH")) <12
+const isMorning = parseInt(moment.tz(Date.now(), "Asia/Singapore").format("HH")) < 12
 
 /* Init */
 axios.defaults.headers.common['User-Agent'] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36";
@@ -64,12 +58,8 @@ async function run(username, password){
   console.log("[SUCCESS]");
 }
 
-// Auth call to https://vafs.nus.edu.sg/adfs/oauth2/authorize?response_type=code&client_id=97F0D1CACA7D41DE87538F9362924CCB-184318&resource=sg_edu_nus_oauth&redirect_uri=https://myaces.nus.edu.sg:443/htd/htd
 async function auth(username, password){
-  /*
-    2 API Calls
-    Login request woundent work without MSIS auth cookies
-  */
+  // Login request woundent work without MSIS auth cookies
   console.log("[AUTH]")
   const auth_url =  'https://vafs.nus.edu.sg/adfs/oauth2/authorize'
   
@@ -134,7 +124,7 @@ async function submit_temp(session_id) {
     'temperature': temp,
     'symptomsFlag': "N"
   })
-  return await axios.post(htd_url, data, config).then(response => response).catch(err => err.response)
+  return await axios.post(htd_url, data, config)
+    .then(response => response)
+    .catch(err => err.response)
 }
-
-// run(username, password);
